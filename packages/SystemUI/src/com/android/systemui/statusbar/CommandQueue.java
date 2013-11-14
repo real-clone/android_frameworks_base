@@ -303,7 +303,6 @@ public class CommandQueue extends IStatusBar.Stub {
             mHandler.removeMessages(MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD);
             Message m = mHandler.obtainMessage(MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD, 0, 0, intent);
             m.sendToTarget();
-        }
     }
 
     public void pause() {
