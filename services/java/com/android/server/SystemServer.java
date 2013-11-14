@@ -64,6 +64,7 @@ import com.android.server.dreams.DreamManagerService;
 import com.android.server.fingerprint.FingerprintService;
 import com.android.server.hdmi.HdmiControlService;
 import com.android.server.gesture.GestureService;
+import com.android.server.gesture.EdgeGestureService;
 import com.android.server.input.InputManagerService;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.lights.LightsService;
@@ -562,6 +563,7 @@ public final class SystemServer {
         AssetAtlasService atlas = null;
         MediaRouterService mediaRouter = null;
         GestureService gestureService = null;
+        EdgeGestureService edgeGestureService = null;
 
         // Bring up services needed for UI.
         if (mFactoryTestMode != FactoryTest.FACTORY_TEST_LOW_LEVEL) {
@@ -1022,6 +1024,14 @@ public final class SystemServer {
             }
 
             mSystemServiceManager.startService(LauncherAppsService.class);
+
+            try {
+                Slog.i(TAG, "EdgeGesture service");
+                edgeGestureService = new EdgeGestureService(context, inputManager);
+                ServiceManager.addService("edgegestureservice", edgeGestureService);
+            } catch (Throwable e) {
+                Slog.e(TAG, "Failure starting EdgeGesture service", e);
+            }
         }
 
         if (!disableNonCoreServices) {
@@ -1132,6 +1142,14 @@ public final class SystemServer {
                 gestureService.systemReady();
             } catch (Throwable e) {
                 reportWtf("making Gesture Sensor Service ready", e);
+            }
+        }
+
+        if (edgeGestureService != null) {
+            try {
+                edgeGestureService.systemReady();
+            } catch (Throwable e) {
+                reportWtf("making EdgeGesture service ready", e);
             }
         }
 
@@ -1287,7 +1305,6 @@ public final class SystemServer {
                 } catch (Throwable e) {
                     reportWtf("Notifying MediaRouterService running", e);
                 }
-
                 try {
                     if (mmsServiceF != null) mmsServiceF.systemRunning();
                 } catch (Throwable e) {
