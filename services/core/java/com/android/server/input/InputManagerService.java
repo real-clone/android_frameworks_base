@@ -162,6 +162,7 @@ public class InputManagerService extends IInputManager.Stub
 
     // State for the currently installed input filter.
     final Object mInputFilterLock = new Object();
+    IInputFilter mInputFilter; // guarded by mInputFilterLock
     ChainedInputFilterHost mInputFilterHost; // guarded by mInputFilterLock
     ArrayList<ChainedInputFilterHost> mInputFilterChain =
             new ArrayList<ChainedInputFilterHost>(); // guarded by mInputFilterLock
@@ -522,6 +523,7 @@ public class InputManagerService extends IInputManager.Stub
     public void setInputFilter(IInputFilter filter) {
         synchronized (mInputFilterLock) {
             if (mInputFilterHost != null) {
+
                 mInputFilterHost.disconnectLocked();
                 mInputFilterChain.remove(mInputFilterHost);
                 mInputFilterHost = null;
