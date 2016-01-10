@@ -11,4 +11,10 @@
     <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_power">Power</string>
 
+    <!-- Navigation bar Tile -->
+    <string name="quick_settings_navigation_bar">Navigation bar</string>
+    <string name="quick_settings_smartbar_off">Navigation bar off</string>
+    <string name="quick_settings_smartbar">SmartBar</string>
+    <string name="quick_settings_fling">Fling gesture</string>
+
 </resources>
