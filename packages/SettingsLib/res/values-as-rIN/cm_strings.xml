@@ -24,4 +24,5 @@
   <string name="select_custom_app_title">কাষ্টম এপ্প চয়ন কৰক</string>
   <string name="select_custom_activity_title">কাষ্টম কাৰ্যকলাপ চয়ন কৰক</string>
   <string name="lockscreen_targets_message">লক স্ক্ৰীণ চমুপথ</string>
+
 </resources>

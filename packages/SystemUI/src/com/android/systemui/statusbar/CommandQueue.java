@@ -16,6 +16,7 @@
 
 package com.android.systemui.statusbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -65,6 +66,8 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_ASSIST_DISCLOSURE          = 22 << MSG_SHIFT;
     private static final int MSG_START_ASSIST               = 23 << MSG_SHIFT;
     private static final int MSG_CAMERA_LAUNCH_GESTURE      = 24 << MSG_SHIFT;
+    private static final int MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD = 25 << MSG_SHIFT;
+    private static final int MSG_SCREEN_PINNING_STATE_CHANGED = 26 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -112,6 +115,8 @@ public class CommandQueue extends IStatusBar.Stub {
         public void showAssistDisclosure();
         public void startAssist(Bundle args);
         public void onCameraLaunchGestureDetected(int source);
+        public void showCustomIntentAfterKeyguard(Intent intent);
+        public void screenPinningStateChanged(boolean enabled);
     }
 
     public CommandQueue(Callbacks callbacks, StatusBarIconList list) {
@@ -311,6 +316,20 @@ public class CommandQueue extends IStatusBar.Stub {
             mHandler.obtainMessage(MSG_CAMERA_LAUNCH_GESTURE, source, 0).sendToTarget();
         }
     }
+	
+	public void showCustomIntentAfterKeyguard(Intent intent) {
+            mHandler.removeMessages(MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD);
+            Message m = mHandler.obtainMessage(MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD, 0, 0, intent);
+            m.sendToTarget();
+    }
+
+    public void screenPinningStateChanged(boolean enabled) {
+        synchronized (mList) {
+            mHandler.removeMessages(MSG_SCREEN_PINNING_STATE_CHANGED);
+            mHandler.obtainMessage(MSG_SCREEN_PINNING_STATE_CHANGED,
+                    enabled ? 1 : 0, 0, null).sendToTarget();
+        }
+    }
 
     private final class H extends Handler {
         public void handleMessage(Message msg) {
@@ -416,6 +435,12 @@ public class CommandQueue extends IStatusBar.Stub {
                     break;
                 case MSG_CAMERA_LAUNCH_GESTURE:
                     mCallbacks.onCameraLaunchGestureDetected(msg.arg1);
+                    break;
+                case MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD:
+                    mCallbacks.showCustomIntentAfterKeyguard((Intent) msg.obj);
+                    break;	
+                case MSG_SCREEN_PINNING_STATE_CHANGED:
+                    mCallbacks.screenPinningStateChanged(msg.arg1 != 0);
                     break;
             }
         }
