@@ -3031,12 +3031,6 @@ public final class Settings {
         public static final String DIM_NAV_BUTTONS_TOUCH_ANYWHERE = "dim_nav_buttons_touch_anywhere";
 
         /**
-         * Enable HW keys
-         * @hide
-         */
-        public static final String ENABLE_HW_KEYS = "enable_hw_keys";
-
-        /**
          * Date format string
          *   mm/dd/yyyy
          *   dd/mm/yyyy
