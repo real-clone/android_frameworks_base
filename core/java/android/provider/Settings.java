@@ -3018,12 +3018,6 @@ public final class Settings {
         public static final String DEV_FORCE_SHOW_NAVBAR = "dev_force_show_navbar";
 
         /**
-         * Enable HW keys
-         * @hide
-         */
-        public static final String ENABLE_HW_KEYS = "enable_hw_keys";
-
-        /**
          * Date format string
          *   mm/dd/yyyy
          *   dd/mm/yyyy
