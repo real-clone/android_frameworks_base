@@ -6316,12 +6316,6 @@ public final class Settings {
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
-         * Whether user is allowed to pull down quick settings on secure keyguard.
-         * @hide
-         */
-        public static final String STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD = "status_bar_locked_on_secure_keyguard";
-
-        /**
          * @hide
          */
         public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
@@ -6538,7 +6532,6 @@ public final class Settings {
             MOUNT_UMS_NOTIFY_ENABLED,
             SLEEP_TIMEOUT,
             DOUBLE_TAP_TO_WAKE,
-            STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD,
             CAMERA_GESTURE_DISABLED
         };
 
