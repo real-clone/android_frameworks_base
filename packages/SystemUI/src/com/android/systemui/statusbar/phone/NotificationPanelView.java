@@ -297,6 +297,7 @@ public class NotificationPanelView extends PanelView implements
             mShowingExternalKeyguard = true;
             mCanDismissKeyguard = false;
             mStatusBar.focusKeyguardExternalView();
+            mLiveLockscreenController.onLiveLockScreenFocusChanged(true /* hasFocus */);
             resetAlphaTranslation();
             // Enables the left edge gesture to allow user
             // to return to keyguard
@@ -385,6 +386,7 @@ public class NotificationPanelView extends PanelView implements
 
         mSwipeHelper = new SwipeHelper(SwipeHelper.X,
                 SwipeHelper.SWIPE_ZONE_LEFT, mSwipeCallback, mContext);
+        mSwipeHelper.setSwipeProgressFadeEnd(1.0f);
         mMinimumFlingVelocity = ViewConfiguration.get(getContext())
                 .getScaledMinimumFlingVelocity();
 
@@ -460,7 +462,6 @@ public class NotificationPanelView extends PanelView implements
                 // Ensure we collapse and clear fade
                 if (action == MotionEvent.ACTION_UP ||
                         action == MotionEvent.ACTION_CANCEL) {
-                    mKeyguardBottomArea.expand(false);
                     mKeyguardBottomArea.setBackground(null);
                 }
 
@@ -976,7 +977,6 @@ public class NotificationPanelView extends PanelView implements
 
         int action = event.getActionMasked();
         if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-            mKeyguardBottomArea.expand(false);
             mKeyguardBottomArea.setBackground(null);
         }
 
@@ -1308,6 +1308,7 @@ public class NotificationPanelView extends PanelView implements
 
         mStatusBarState = statusBarState;
         mKeyguardShowing = keyguardShowing;
+        mCanDismissKeyguard = keyguardShowing;
 
         if (goingToFullShade || (oldState == StatusBarState.KEYGUARD
                 && statusBarState == StatusBarState.SHADE_LOCKED)) {
@@ -1856,6 +1857,7 @@ public class NotificationPanelView extends PanelView implements
         mNotificationStackScroller.setShadeExpanded(!isFullyCollapsed());
         if (mShowingExternalKeyguard && expandedHeight >= getMaxPanelHeight()) {
             mStatusBar.unfocusKeyguardExternalView();
+            mLiveLockscreenController.onLiveLockScreenFocusChanged(false /* hasFocus */);
             mShowingExternalKeyguard = false;
         }
         if (DEBUG) {
@@ -2053,7 +2055,6 @@ public class NotificationPanelView extends PanelView implements
                 * mKeyguardStatusBarAnimateAlpha);
         mKeyguardStatusBar.setVisibility(mKeyguardStatusBar.getAlpha() != 0f
                 && !mDozing ? VISIBLE : INVISIBLE);
-        mStatusBar.getVisualizer().setAlpha(mKeyguardStatusBar.getAlpha());
     }
 
     private void updateHeaderKeyguard() {
@@ -2290,6 +2291,7 @@ public class NotificationPanelView extends PanelView implements
 
     @Override
     protected void startUnlockHintAnimation() {
+        mKeyguardBottomArea.expand(true);
         super.startUnlockHintAnimation();
         startHighlightIconAnimation(getCenterIcon());
     }
