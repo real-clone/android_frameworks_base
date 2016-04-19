@@ -780,6 +780,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private boolean mHasPermanentMenuKey;
     private boolean mClearedBecauseOfForceShow;
     private boolean mTopWindowIsKeyguard;
+    private CameraManager mCameraManager;
+    private boolean mTorchEnabled;
+    private boolean mIsTorchActive;
+    private boolean mWasTorchActive;
     private CMHardwareManager mCMHardware;
     private boolean mShowKeyguardOnLeftSwipe;
 

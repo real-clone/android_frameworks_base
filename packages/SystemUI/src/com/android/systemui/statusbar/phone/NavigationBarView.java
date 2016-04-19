@@ -45,6 +45,17 @@ import android.os.RemoteException;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.*;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewRootImpl;
+import android.view.WindowManager;
+import android.view.GestureDetector;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -323,8 +334,7 @@ public class NavigationBarView extends BaseNavigationBar {
         ((ImageView)getRecentsButton()).setImageDrawable(mVertical ? mRecentLandIcon : mRecentIcon);
         ((ImageView)getHomeButton()).setImageDrawable(mVertical ? mHomeLandIcon : mHomeIcon);
 
-        final boolean showImeButton = ((hints & StatusBarManager.NAVIGATION_HINT_IME_SHOWN) != 0)
-                                && !mShowDpadArrowKeys;
+        final boolean showImeButton = ((hints & StatusBarManager.NAVIGATION_HINT_IME_SHOWN) != 0);
         getImeSwitchButton().setVisibility(showImeButton ? View.VISIBLE : View.INVISIBLE);
         // Update menu button in case the IME state has changed.
         setMenuVisibility(mShowMenu, true);

@@ -36,6 +36,7 @@ import com.android.internal.utils.du.DUActionUtils;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSDetailItemsList;
 import com.android.systemui.qs.QSTile;
+import cyanogenmod.app.StatusBarPanelCustomTile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -239,11 +240,16 @@ public class NavigationBarTile extends QSTile<NavigationBarTile.NavbarState> {
 
         @Override
         public void setToggleState(boolean state) {
-            MetricsLogger.action(mContext, MetricsLogger.QS_NAVBAR_TOGGLE, state);
+            //MetricsLogger.action(mContext, MetricsLogger.QS_NAVBAR_TOGGLE, state);
             Settings.Secure.putInt(mContext.getContentResolver(),
                     Settings.Secure.NAVIGATION_BAR_VISIBLE, state ? 1 : 0);
         }
 
+        @Override
+        public StatusBarPanelCustomTile getCustomTile() {
+           return null;
+        }
+ 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) {
             mItems = QSDetailItemsList.convertOrInflate(context, convertView, parent);

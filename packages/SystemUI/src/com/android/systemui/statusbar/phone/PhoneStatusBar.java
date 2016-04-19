@@ -23,6 +23,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.NonNull;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
+import android.app.ActivityOptions;
 import android.app.IActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -83,6 +84,7 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import android.util.EventLog;
@@ -594,8 +596,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNavigationBarView.setDisabledFlags(mDisabled1);
 //        addNavigationBarCallback(mNavigationBarView);
         mNavigationBarView.notifyInflateFromUser(); // let bar know we're not starting from boot
-        addNavigationBar();
-        mNavigationBarView.setBar(this);
         addNavigationBar(true); // dynamically adding nav bar, reset System UI visibility!
     }
 
@@ -3925,6 +3925,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         ThemeConfig newTheme = newConfig != null ? newConfig.themeConfig : null;
         final boolean updateStatusBar = shouldUpdateStatusbar(mCurrentTheme, newTheme);
         final boolean updateNavBar = shouldUpdateNavbar(mCurrentTheme, newTheme);
+        SettingsObserver observer = new SettingsObserver(mHandler);
         if (newTheme != null) mCurrentTheme = (ThemeConfig) newTheme.clone();
         if (updateStatusBar) {
             recreateStatusBar();
@@ -3934,7 +3935,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 resolver, Settings.System.STATUS_BAR_CRDROID_LOGO, 0) == 1;
             showCrdroidLogo(mCrdroidLogo);
 
-            DontStressOnRecreate();
             if (mNavigationBarView != null) {
                 mNavigationBarView.onRecreateStatusbar();
             }
