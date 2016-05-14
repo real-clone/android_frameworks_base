@@ -3775,6 +3775,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mLiveLockScreenController.cleanup();
         }
 
+        mKeyguardBottomArea.cleanup();
         mStatusBarWindow.removeContent(mStatusBarWindowContent);
         mStatusBarWindow.clearDisappearingChildren();
 
