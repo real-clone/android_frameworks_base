@@ -280,9 +280,6 @@ public class NavigationBarView extends LinearLayout {
                 updateLightsOutResources(container);
             }
         }
-        if (mEditBar != null) {
-            mEditBar.updateResources(res);
-        }
     }
 
     private void updateLightsOutResources(ViewGroup container) {
