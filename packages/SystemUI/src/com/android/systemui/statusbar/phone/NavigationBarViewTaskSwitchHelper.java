@@ -26,7 +26,7 @@ import com.android.systemui.statusbar.BaseStatusBar;
 
 public class NavigationBarViewTaskSwitchHelper extends GestureDetector.SimpleOnGestureListener {
 
-    private BaseStatusBar mBar;
+    private PhoneStatusBar mBar;
     private boolean mIsVertical;
     private boolean mIsRTL;
 
@@ -44,7 +44,7 @@ public class NavigationBarViewTaskSwitchHelper extends GestureDetector.SimpleOnG
         mTaskSwitcherDetector = new GestureDetector(context, this);
     }
 
-    public void setBar(BaseStatusBar phoneStatusBar) {
+    public void setBar(PhoneStatusBar phoneStatusBar) {
         mBar = phoneStatusBar;
     }
 

@@ -3011,13 +3011,6 @@ public final class Settings {
                 new DiscreteValueValidator(new String[] {"12", "24"});
 
         /**
-        * Developer options - Navigation Bar show switch
-        * @deprecated Moved to CMSettings.Secure.DEV_FORCE_SHOW_NAVBAR
-        * @hide
-        */
-        public static final String DEV_FORCE_SHOW_NAVBAR = "dev_force_show_navbar";
-
-        /**
          * Date format string
          *   mm/dd/yyyy
          *   dd/mm/yyyy
@@ -3655,22 +3648,16 @@ public final class Settings {
         public static final String STATUS_BAR_CUSTOM_HEADER_PROVIDER = "status_bar_custom_header_provider";
 
         /**
-         * Navigation bar height when it is on protrait
+         * Double Tap to Sleep Navbar
          * @hide
          */
-        public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+        public static final String DOUBLE_TAP_SLEEP_NAVBAR = "double_tap_sleep_navbar";
 
         /**
-         * Navigation bar height when it is on landscape at the right
+         * Whether navigation bar is placed on the left side in landscape mode
          * @hide
          */
-        public static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
-
-        /**
-         * Wether navigation bar is enabled or not
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
+        public static final String NAVBAR_LEFT_IN_LANDSCAPE = "navigation_bar_left";
 
         /**
          * Whether to show the battery bar
@@ -6185,6 +6172,12 @@ public final class Settings {
         public static final String DOZE_ENABLED = "doze_enabled";
 
         /**
+         * Add or remove software navigation bar
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_VISIBLE = "navigation_bar_visible";
+
+        /**
          * The current night mode that has been selected by the user.  Owned
          * and controlled by UiModeManagerService.  Constants are as per
          * UiModeManager.
@@ -6432,6 +6425,167 @@ public final class Settings {
          * @hide
          */
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
+
+        /**
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
+
+        /**
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+
+        /**
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
+
+        /**
+         * Navigation bar mode
+         *
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_MODE = "navigation_bar_mode";
+
+        /**
+         * Fling actions
+         *
+         * @hide
+         */
+        public static final String FLING_GESTURE_ACTIONS = "fling_gesture_configs";
+
+        /**
+         * Fling logo visible
+         *
+         * @hide
+         */
+        public static final String FLING_LOGO_VISIBLE = "fling_logo_visible";
+
+        /**
+         * Fling logo animates
+         *
+         * @hide
+         */
+        public static final String FLING_LOGO_ANIMATES= "fling_logo_animates";
+
+        /**
+         * Fling logo animates
+         *
+         * @hide
+         */
+        public static final String FLING_LOGO_COLOR = "fling_logo_color";
+
+        /**
+         * Fling pulse music visualizer
+         *
+         * @hide
+         */
+        public static final String FLING_PULSE_ENABLED = "fling_pulse_enabled";
+
+        /**
+         * Fling pulse music visualizer color
+         *
+         * @hide
+         */
+        public static final String FLING_PULSE_COLOR = "fling_pulse_color";
+
+        /**
+         * Fling ripple effect
+         *
+         * @hide
+         */
+        public static final String FLING_RIPPLE_ENABLED = "fling_ripple_enabled";
+
+        /**
+         * Fling ripple color
+         *
+         * @hide
+         */
+        public static final String FLING_RIPPLE_COLOR = "fling_ripple_color";
+
+        /**
+         * Fling gesture trails on/off
+         *
+         * @hide
+         */
+        public static final String FLING_TRAILS_ENABLED = "fling_trails_enabled";
+
+        /**
+         * Fling gesture trails color
+         *
+         * @hide
+         */
+        public static final String FLING_TRAILS_COLOR = "fling_trails_color";
+
+        /**
+         * Fling pulse lavalamp psychedelic colors
+         *
+         * @hide
+         */
+        public static final String FLING_PULSE_LAVALAMP_ENABLED = "fling_pulse_lavalamp_enabled";
+
+        /**
+         * Fling pulse lavalamp animation speed
+         *
+         * @hide
+         */
+        public static final String FLING_PULSE_LAVALAMP_SPEED = "fling_pulse_lavalamp_speed";
+
+        /**
+         * time it takes to execute Fling long press action
+         *
+         * @hide
+         */
+        public static final String FLING_LONGPRESS_TIMEOUT = "fling_longpress_timeout";
+
+        /**
+         * distance to swipe right when device is in portrait orientation to
+         * trigger action
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_RIGHT_PORT = "fling_longswipe_threshold_right_port";
+
+        /**
+         * distance to swipe left when device is in portrait orientation to
+         * trigger action
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_LEFT_PORT = "fling_longswipe_threshold_left_port";
+
+        /**
+         * distance to swipe right when device is in landscape orientation to
+         * trigger action. Apples to a horizontal layout (tablet/phablet)
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_RIGHT_LAND = "fling_longswipe_threshold_right_land";
+
+        /**
+         * distance to swipe left when device is in landscape orientation to
+         * trigger action. Apples to a horizontal layout (tablet/phablet)
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_LEFT_LAND = "fling_longswipe_threshold_left_land";
+
+        /**
+         * distance to swipe up when device is in landscape orientation to
+         * trigger action. Apples to a vertical layout (phones)
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_UP_LAND = "fling_longswipe_threshold_up_land";
+
+        /**
+         * distance to swipe down when device is in landscape orientation to
+         * trigger action. Apples to a horizontal layout (phones)
+         *
+         * @hide
+         */
+        public static final String FLING_LONGSWIPE_THRESHOLD_DOWN_LAND = "fling_longswipe_threshold_down_land";
 
         /**
          * This are the settings to be backed up.
